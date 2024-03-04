@@ -22,8 +22,7 @@ public class index {
                     String username = sc.next();
                     System.out.println("Enter Password");
                     String password = sc.next();
-                    admin a = new admin();
-                    a.login(username, password);
+                    admin a = new admin(username, password);
 
                     break;
                 case 2:
