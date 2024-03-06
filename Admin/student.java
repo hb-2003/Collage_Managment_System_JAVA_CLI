@@ -160,106 +160,106 @@ public class student {
     }
 
     public void updateStudent() {
-        try {
-            Statement stmt = conn.createStatement();
-            String first_name, middle_name, last_name, date_of_birth, gender, email, phone_number,
-                    addresses, addmission_type, admission_date, status;
-            Integer course, batch_year;
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter student id to update: ");
-            int student_id = sc.nextInt();
-            ResultSet admin = stmt.executeQuery("selec t* from admin where id =" + this.id);
-            ResultSet rs = stmt.executeQuery("select * from student where id = " + student_id);
-            rs.next();
-            System.out.println(rs.getInt(student_id));
-            System.out.println(rs.getString("first_name"));
+        // try {
+        //     Statement stmt = conn.createStatement();
+        //     String first_name, middle_name, last_name, date_of_birth, gender, email, phone_number,
+        //             addresses, addmission_type, admission_date, status;
+        //     Integer course, batch_year;
+        //     Scanner sc = new Scanner(System.in);
+        //     System.out.println("Enter student id to update: ");
+        //     int student_id = sc.nextInt();
+        //     ResultSet admin = stmt.executeQuery("selec t* from admin where id =" + this.id);
+        //     ResultSet rs = stmt.executeQuery("select * from student where id = " + student_id);
+        //     rs.next();
+        //     System.out.println(rs.getInt(student_id));
+        //     System.out.println(rs.getString("first_name"));
 
-            // System.out.println("if you don't want to update a field just press enter");
-            // System.out.println("Enter First Name: ");
-            // first_name = sc.nextLine();
-            // if (first_name.equals("")) {
-            // first_name = rs.getString("first_name");
-            // }
-            // System.out.println("Enter Middle Name: ");
-            // middle_name = sc.nextLine();
-            // if (middle_name.equals("")) {
-            // middle_name = rs.getString("middle_name");
-            // }
-            // System.out.println("Enter Last Name: ");
-            // last_name = sc.nextLine();
-            // if (last_name.equals("")) {
-            // last_name = rs.getString("last_name");
-            // }
-            // System.out.println("Enter Date of Birth: ");
-            // date_of_birth = sc.nextLine();
-            // if (date_of_birth.equals("")) {
-            // date_of_birth = rs.getString("date_of_birth");
-            // }
-            // System.err.println("1. Male\n2. Female\n3. Other");
-            // int choice = sc.nextInt();
-            // if (choice == 1) {
-            // gender = "Male";
-            // } else if (choice == 2)
-            // gender = "Female";
-            // else {
-            // gender = "Other";
-            // }
-            // System.out.println("Enter Email: ");
-            // email = sc.nextLine();
-            // if (email.equals("")) {
-            // email = rs.getString("email");
-            // }
-            // System.out.println("Enter Phone Number: ");
-            // phone_number = sc.nextLine();
-            // if (phone_number.equals("")) {
-            // phone_number = rs.getString("phone_number");
-            // }
-            // System.out.println("Enter Address: ");
-            // addresses = sc.nextLine();
+        //     // System.out.println("if you don't want to update a field just press enter");
+        //     // System.out.println("Enter First Name: ");
+        //     // first_name = sc.nextLine();
+        //     // if (first_name.equals("")) {
+        //     // first_name = rs.getString("first_name");
+        //     // }
+        //     // System.out.println("Enter Middle Name: ");
+        //     // middle_name = sc.nextLine();
+        //     // if (middle_name.equals("")) {
+        //     // middle_name = rs.getString("middle_name");
+        //     // }
+        //     // System.out.println("Enter Last Name: ");
+        //     // last_name = sc.nextLine();
+        //     // if (last_name.equals("")) {
+        //     // last_name = rs.getString("last_name");
+        //     // }
+        //     // System.out.println("Enter Date of Birth: ");
+        //     // date_of_birth = sc.nextLine();
+        //     // if (date_of_birth.equals("")) {
+        //     // date_of_birth = rs.getString("date_of_birth");
+        //     // }
+        //     // System.err.println("1. Male\n2. Female\n3. Other");
+        //     // int choice = sc.nextInt();
+        //     // if (choice == 1) {
+        //     // gender = "Male";
+        //     // } else if (choice == 2)
+        //     // gender = "Female";
+        //     // else {
+        //     // gender = "Other";
+        //     // }
+        //     // System.out.println("Enter Email: ");
+        //     // email = sc.nextLine();
+        //     // if (email.equals("")) {
+        //     // email = rs.getString("email");
+        //     // }
+        //     // System.out.println("Enter Phone Number: ");
+        //     // phone_number = sc.nextLine();
+        //     // if (phone_number.equals("")) {
+        //     // phone_number = rs.getString("phone_number");
+        //     // }
+        //     // System.out.println("Enter Address: ");
+        //     // addresses = sc.nextLine();
 
-            // if (addresses.equals("")) {
-            // addresses = rs.getString("addresses");
-            // }
-            // course = rs.getInt("department_id");
-            // batch_year = rs.getInt("batch_year");
-            // addmission_type = rs.getString("admission_type");
-            // admission_date = rs.getString("admission_date");
-            // System.err.println(
-            // "1. Active\n2. Deactive\n3. Passout\n4. Dropout\n5.Suspended\n6.
-            // Expelled\n7.Transfered\n8. Detained");
-            // status = rs.getString("status");
-            // choice = sc.nextInt();
-            // if (choice == 1) {
-            // status = "active";
-            // } else if (choice == 2) {
-            // status = "deactive";
-            // } else if (choice == 3) {
-            // status = "passout";
-            // } else if (choice == 4) {
-            // status = "dropout";
-            // } else {
-            // System.out.println("Invalid Input");
-            // }
+        //     // if (addresses.equals("")) {
+        //     // addresses = rs.getString("addresses");
+        //     // }
+        //     // course = rs.getInt("department_id");
+        //     // batch_year = rs.getInt("batch_year");
+        //     // addmission_type = rs.getString("admission_type");
+        //     // admission_date = rs.getString("admission_date");
+        //     // System.err.println(
+        //     // "1. Active\n2. Deactive\n3. Passout\n4. Dropout\n5.Suspended\n6.
+        //     // Expelled\n7.Transfered\n8. Detained");
+        //     // status = rs.getString("status");
+        //     // choice = sc.nextInt();
+        //     // if (choice == 1) {
+        //     // status = "active";
+        //     // } else if (choice == 2) {
+        //     // status = "deactive";
+        //     // } else if (choice == 3) {
+        //     // status = "passout";
+        //     // } else if (choice == 4) {
+        //     // status = "dropout";
+        //     // } else {
+        //     // System.out.println("Invalid Input");
+        //     // }
 
-            // String sql = "update student set first_name = '" + first_name + "',
-            // middle_name = '" + middle_name
-            // + "', last_name = '" + last_name + "', date_of_birth = '" + date_of_birth +
-            // "',gender = '" + gender
-            // + "', email = '" + email + "', phone_number = '" + phone_number + "',
-            // addresses = '" + addresses
-            // + "', department_id = " + course + ", batch_year = " + batch_year + ",
-            // admission_type = '"
-            // + addmission_type + "', admission_date = '" + admission_date + "', status =
-            // '" + status
-            // + "' where id = " + student_id;
-            // if (stmt.executeUpdate(sql) > 0) {
-            // System.out.println("Student Updated Successfully");
-            // } else {
-            // System.out.println("Error Occured");
-            // }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        //     // String sql = "update student set first_name = '" + first_name + "',
+        //     // middle_name = '" + middle_name
+        //     // + "', last_name = '" + last_name + "', date_of_birth = '" + date_of_birth +
+        //     // "',gender = '" + gender
+        //     // + "', email = '" + email + "', phone_number = '" + phone_number + "',
+        //     // addresses = '" + addresses
+        //     // + "', department_id = " + course + ", batch_year = " + batch_year + ",
+        //     // admission_type = '"
+        //     // + addmission_type + "', admission_date = '" + admission_date + "', status =
+        //     // '" + status
+        //     // + "' where id = " + student_id;
+        //     // if (stmt.executeUpdate(sql) > 0) {
+        //     // System.out.println("Student Updated Successfully");
+        //     // } else {
+        //     // System.out.println("Error Occured");
+        //     // }
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
         return;
     }
 
