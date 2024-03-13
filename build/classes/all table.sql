@@ -57,11 +57,13 @@ create table instructor(
     phone_number VARCHAR(15),
     address VARCHAR(255),
     joining_date DATE,
-    instructor_tupe ENUM('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other'),
+    instructor_type ENUM('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other'),
     status ENUM('active', 'deactive', 'resigned', 'retired', 'suspended', 'expelled', 'transfered'),
     PRIMARY KEY (id),
     FOREIGN KEY (department_id) REFERENCES departments(id)
 );
+INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status) 
+VALUES ('John', 'Doe', 'Smith', 1, 'john.doe@example.com', 35, 'Ph.D. in Computer Science', 'ABC College', '9258514856', '123 Main St, City, Country', '2023-01-15', 'professor', 'active');
 
 //courses
 CREATE TABLE courses (
