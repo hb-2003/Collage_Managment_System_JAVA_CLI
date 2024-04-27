@@ -4,18 +4,76 @@ CREATE TABLE departments (
     department_name VARCHAR(100),
     PRIMARY KEY (id)
 );
-
--- Create the admin table
-CREATE TABLE admin (
-    id INT(5) AUTO_INCREMENT,
-    name VARCHAR(100),
-    username VARCHAR(30),
-    password VARCHAR(25),
+create table instructor(
+    id int(5) AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    middle_name VARCHAR(50),
+    last_name VARCHAR(50),
     department_id int(5),
+    email VARCHAR(100),
+    age int(3),
+    qualification VARCHAR(100),
+    college_name VARCHAR(100),
+    phone_number VARCHAR(15),
+    address VARCHAR(255),
+    joining_date DATE,
+    
+    instructor_type ENUM('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other'),
+    status ENUM('active', 'deactive', 'resigned', 'retired', 'suspended', 'expelled', 'transfered'),
     PRIMARY KEY (id),
     FOREIGN KEY (department_id) REFERENCES departments(id)
 );
 
+-- //instructor table password and username add column
+ALTER TABLE instructor ADD COLUMN username VARCHAR(100);
+ALTER TABLE instructor ADD COLUMN password VARCHAR(255);
+//default value set in password 
+
+-+----------+
+-- |  1 | John       | Doe          | Smith     |             1 | john.doe@example.com |   35 | Ph.D. in Computer Science | ABC College        | 9258514856   | 123 Main St, City, Country     | 2023-01-15   | professor       | active | NULL     | NULL     |
+-- |  2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ  | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active | NULL     | NULL     |
+-- |  6 | darshan    | kumar        | patel     |             3 |  darsh@mgmail.com    |   22 | MCA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | NULL     | NULL     |
+-- |  7 | krishna    | ashokbbhai   | dobariya  |             1 | krishna@gmail.com    |   25 | MBA                       | ddu                | 1254788956   | 123 main street,city,country   | 2020-03-15   | professor       | active | NULL     | NULL     |
+-- |  8 | harsh      | kumar        | patel     |             3 | harsh@gmail.com      |   22 | MBA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | NULL     | NULL     |
+update instructor set username='john',password='john' where id=1;
+update instructor set username='meet',password='meet' where id=2;
+update instructor set username='darshan',password='darshan' where id=6;
+update instructor set username='krishna',password='krishna' where id=7;
+update instructor set username='harsh',password='harsh' where id=8;
+
+--   2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active |
+    -- //creare instructor one record
+    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('darshan', 'kumar', 'patel', 3, ' darsh@mgmail.com',22,'MBA','Gujarat University','9876543210','123 main street,city,country','2020-03-15','professor','active');  
+    -- //creare instructor two record
+    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('krishna', 'ashokbbhai', 'dobariya', 1, 'krishna@gmail.com',25,'MBA', 'ddu','1254788956','123 main street,city,country','2020-03-15','professor','active');
+    -- //creare instructor three record
+    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('harsh', 'kumar', 'patel', 3, 'harsh@gmail.com',22,'MBA','Gujarat University','9876543210','123 main street,city,country','2020-03-15','professor','active');
+    
+       -- 2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active |
+    -- //creare instructor one record
+-- Create the admin table
+CREATE TABLE admin (
+    id INT(5) AUTO_INCREMENT,
+    instructor_id INT(5),
+    username VARCHAR(100),
+    password VARCHAR(255),
+    department_id INT(5),
+    PRIMARY KEY (id),
+    FOREIGN KEY (instructor_id) REFERENCES instructor(id),
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+
+);
+    -> ;
++----+---------------+-------+----------+---------------+
+| id | instructor_id | username | password | department_id |
++----+---------------+-------+----------+---------------+
+|  2 |             1 |    mca   | mca      |             1 |
+|  4 |             8 |   mba    | mba      |             3 |
++----+---------------+-------+----------+---------------+
+
+
+INSERT INTO admin (instructor_id, username, password, department_id) VALUES (1, 'mca', 'mca', 1);
+INSERT INTO admin (instructor_id, username, password, department_id) VALUES (8, 'mba', 'mba', 3);
 -- Inserting a department into the "departments" table
 INSERT INTO departments (department_name) VALUES ('MCA');
 
@@ -42,68 +100,49 @@ CREATE TABLE student (
     PRIMARY KEY (id),
     FOREIGN KEY (department_id) REFERENCES departments(id)
 ); 
+ALTER TABLE student ADD COLUMN username VARCHAR(100);
+ALTER TABLE student ADD COLUMN password VARCHAR(255);
+
+--  1 | Hardik     | Kumar       | Pandey    | 1998-12-01    | Male   | hardik@gmail.com | 1234567890   | Bihar
+--             |             1 |       2020 | SFI            | 2020-07-01     | active | NULL     | NULL     |
+-- |  2 | meet       | parkashbhai | bhalala   | 2003-04-11    | Male   | fewfd@gmial.com  | 8866376051   | dwqdwq,ewqe,qwewqe,        |             1 |       2020 | GIA            | 2023-08-11     | active | NULL     | NULL     |
+-- |  3 | Hardik     | Bhanderi    | Doe       | 2000-05-15    | Male   | Hardik@gmail.com | 9601175538   | 123 Main St, City, Country |             1 |       2022 | SFI            | 2022-09-01     | active | NULL     | NULL     |
+-- +----+---------
+update student set username='hardik',password='hardik' where id=1;
+update student set username='meet', password='meet' where id=2;
+update student set username='hardik', password='hardik' where id=3;
 
 //instructor
-create table instructor(
-    id int(5) AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    middle_name VARCHAR(50),
-    last_name VARCHAR(50),
-    department_id int(5),
-    email VARCHAR(100),
-    age int(3),
-    qualification VARCHAR(100),
-    college_name VARCHAR(100),
-    phone_number VARCHAR(15),
-    address VARCHAR(255),
-    joining_date DATE,
-    instructor_type ENUM('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other'),
-    status ENUM('active', 'deactive', 'resigned', 'retired', 'suspended', 'expelled', 'transfered'),
-    PRIMARY KEY (id),
-    FOREIGN KEY (department_id) REFERENCES departments(id)
-);
+
 INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status) 
 VALUES ('John', 'Doe', 'Smith', 1, 'john.doe@example.com', 35, 'Ph.D. in Computer Science', 'ABC College', '9258514856', '123 Main St, City, Country', '2023-01-15', 'professor', 'active');
 
-//courses
-CREATE TABLE courses (
+
+-- semester subjects
+CREATE TABLE semester_subjects (
     id INT(5) AUTO_INCREMENT,
-    course_name VARCHAR(100),
+    semester_id INT(5),
     department_id INT(5),
-    instructor_id int(5),
+    subject_name VARCHAR(100),
+    subject_code VARCHAR(10),
     PRIMARY KEY (id),
-    FOREIGN KEY (department_id) REFERENCES departments(id),
-    FOREIGN KEY (instructor_id) REFERENCES instructor(id)
-);
- 
-
-
-// student courses
-CREATE TABLE student_courses (
-    student_id INT(5),
-    course_id INT(5),
-    PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES students(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    FOREIGN KEY (department_id) REFERENCES departments(id)
 );
 
-//instructor courses
-CREATE TABLE instructor_courses (
-    instructor_id INT(5),
-    course_id INT(5),
-    PRIMARY KEY (instructor_id, course_id),
-    FOREIGN KEY (instructor_id) REFERENCES instructors(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
-);
 //attendance
-CREATE TABLE student_attendance (
+CREATE TABLE attendance (
+    id INT(5) AUTO_INCREMENT,
     student_id INT(5),
-    course_id INT(5),
+    department_id INT(5),
+    semester_id INT(5),
+    subject_id INT(5),
     date DATE,
-    status ENUM('present', 'absent'),
-    PRIMARY KEY (student_id, course_id, date),
+    status ENUM('1', '0'),
+    PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES students(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (semester_id) REFERENCES semesters(id),
+    FOREIGN KEY (subject_id) REFERENCES semester_subjects(id)
 );
 
 -- semesters
@@ -148,7 +187,26 @@ CREATE TABLE semester_subjects (
     FOREIGN KEY (semester_id) REFERENCES semesters(id),
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
++----+-------------+---------------+---------------+--------------+
+| id | semester_id | department_id | subject_name  | subject_code |
++----+-------------+---------------+---------------+--------------+
+|  1 |           1 |             1 | webdesing     | 121          |
+|  2 |           2 |             1 | datastructers | 202          |
+|  3 |           3 |             1 | python        | 301          |
++----+-------------+---------------+---------------+--------------+
+add semester 1 sunject  and sem 1 in coll 5 subject_codet this is alredy record in semester_subjects table
+anter a new record in semester_subjects table
 
+INSERT INTO semester_subjects (semester_id, department_id, subject_name, subject_code) VALUES ( 1,1, 'mysql', '104'),(1,1,"c",'101'),(1,1,'java','102'),(1,1,"swift","103");
+
+result table
+
+create table result(
+    id int(5) AUTO_INCREMENT,
+    student_id int(5),
+    department_id int(5),
+    
+    
 //student marks
 CREATE TABLE student_marks (
     student_id INT(5),
