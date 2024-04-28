@@ -40,18 +40,42 @@ update instructor set username='meet',password='meet' where id=2;
 update instructor set username='darshan',password='darshan' where id=6;
 update instructor set username='krishna',password='krishna' where id=7;
 update instructor set username='harsh',password='harsh' where id=8;
++----+------------+--------------+-----------+---------------+----------------------+------+---------------------------+--------------------+--------------+--------------------------------+--------------+-----------------+--------+----------+----------+
+| id | first_name | middle_name  | last_name | department_id | email                | age  | qualification             | college_name       | phone_number | address                        | joining_date | instructor_type | status | username | password |
++----+------------+--------------+-----------+---------------+----------------------+------+---------------------------+--------------------+--------------+--------------------------------+--------------+-----------------+--------+----------+----------+
+|  1 | John       | Doe          | Smith     |             1 | john.doe@example.com |   35 | Ph.D. in Computer Science | ABC College        | 9258514856   | 123 Main St, City, Country     | 2023-01-15   | professor       | active | john     | john     |
+|  2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ  | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active | meet     | meet     |
+|  6 | darshan    | kumar        | patel     |             3 |  darsh@mgmail.com    |   22 | MCA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | darshan  | darshan  |
+|  7 | krishna    | ashokbbhai   | dobariya  |             1 | krishna@gmail.com    |   25 | MBA                       | ddu                | 1254788956   | 123 main street,city,country   | 2020-03-15   | professor       | active | krishna  | krishna  |
+|  8 | harsh      | kumar        | patel     |             3 | harsh@gmail.com      |   22 | MBA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | harsh    | harsh    |
++----+------------+--------------+-----------+---------------+----------------------+------+---------------------------+--------------------+--------------+--------------------------------+--------------+-----------------+--------+----------+----------+
 
---   2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active |
-    -- //creare instructor one record
-    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('darshan', 'kumar', 'patel', 3, ' darsh@mgmail.com',22,'MBA','Gujarat University','9876543210','123 main street,city,country','2020-03-15','professor','active');  
-    -- //creare instructor two record
-    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('krishna', 'ashokbbhai', 'dobariya', 1, 'krishna@gmail.com',25,'MBA', 'ddu','1254788956','123 main street,city,country','2020-03-15','professor','active');
-    -- //creare instructor three record
-    INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status)   VALUES ('harsh', 'kumar', 'patel', 3, 'harsh@gmail.com',22,'MBA','Gujarat University','9876543210','123 main street,city,country','2020-03-15','professor','active');
-    
-       -- 2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active |
-    -- //creare instructor one record
--- Create the admin table
+------+-----+---------+----------------+
+| Field           | Type                                                                                               | Null | Key | Default | Extra          |
++-----------------+----------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| id              | int                                                                                                | NO   | PRI | NULL    | auto_increment |
+| first_name      | varchar(50)                                                                                        | YES  |     | NULL    |                |
+| middle_name     | varchar(50)                                                                                        | YES  |     | NULL    |                |
+| last_name       | varchar(50)                                                                                        | YES  |     | NULL    |                |
+| department_id   | int                                                                                                | YES  | MUL | NULL    |                |
+| email           | varchar(100)                                                                                       | YES  |     | NULL    |                |
+| age             | int                                                                                                | YES  |     | NULL    |                |
+| qualification   | varchar(100)                                                                                       | YES  |     | NULL    |                |
+| college_name    | varchar(100)                                                                                       | YES  |     | NULL    |                |
+| phone_number    | varchar(15)                                                                                        | YES  |     | NULL    |                |
+| address         | varchar(255)                                                                                       | YES  |     | NULL    |                |
+| joining_date    | date                                                                                               | YES  |     | NULL    |                |
+| instructor_type | enum('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other') | YES  |     | NULL    |                |
+| status          | enum('active','deactive','resigned','retired','suspended','expelled','transfered')                 | YES  |     | NULL    |                |
+| username        | varchar(100)                                                                                       | YES  |     | NULL    |                |
+| password        | varchar(255)                                                                                       | YES  |     | NULL    |                |
++-----------------+----------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+16 rows in set (0.20 sec)
+]
+insert into instructor values('meet','meet','meet',1,'email@gmail.com',33,'fwefwef','wdggberfg','2345678987','defxefx','2024-05-25','professor','active','meet','meet');
+INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status, username, password) 
+VALUES ('Meet', NULL, 'Bhalala', 1, 'meet@example.com', 25, 'B.Tech', 'ABC College', '1234567890', '123 Street, City', '2024-04-30', 'lecturer', 'active', 'meet123', 'password123');
+
 CREATE TABLE admin (
     id INT(5) AUTO_INCREMENT,
     instructor_id INT(5),
@@ -103,11 +127,18 @@ CREATE TABLE student (
 ALTER TABLE student ADD COLUMN username VARCHAR(100);
 ALTER TABLE student ADD COLUMN password VARCHAR(255);
 
---  1 | Hardik     | Kumar       | Pandey    | 1998-12-01    | Male   | hardik@gmail.com | 1234567890   | Bihar
---             |             1 |       2020 | SFI            | 2020-07-01     | active | NULL     | NULL     |
--- |  2 | meet       | parkashbhai | bhalala   | 2003-04-11    | Male   | fewfd@gmial.com  | 8866376051   | dwqdwq,ewqe,qwewqe,        |             1 |       2020 | GIA            | 2023-08-11     | active | NULL     | NULL     |
--- |  3 | Hardik     | Bhanderi    | Doe       | 2000-05-15    | Male   | Hardik@gmail.com | 9601175538   | 123 Main St, City, Country |             1 |       2022 | SFI            | 2022-09-01     | active | NULL     | NULL     |
--- +----+---------
+| id | first_name | middle_name  | last_name | department_id | email                | age  | qualification             | college_name       | phone_number | address                        | joining_date | instructor_type | status | username | password |
++----+------------+--------------+-----------+---------------+----------------------+------+---------------------------+--------------------+--------------+--------------------------------+--------------+-----------------+--------+----------+----------+
+|  1 | John       | Doe          | Smith     |             1 | john.doe@example.com |   35 | Ph.D. in Computer Science | ABC College        | 9258514856   | 123 Main St, City, Country     | 2023-01-15   | professor       | active | john     | john     |
+|  2 | meet       | parakashbhai | bhalala   |             1 | meet@example.com     |   40 | Ph.D. in Computer Science | University of XYZ  | +9876543210  | 456 Park Avenue, City, Country | 2020-03-15   | professor       | active | meet     | meet     |
+|  6 | darshan    | kumar        | patel     |             3 |  darsh@mgmail.com    |   22 | MCA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | darshan  | darshan  |
+|  7 | krishna    | ashokbbhai   | dobariya  |             1 | krishna@gmail.com    |   25 | MBA                       | ddu                | 1254788956   | 123 main street,city,country   | 2020-03-15   | professor       | active | krishna  | krishna  |
+|  8 | harsh      | kumar        | patel     |             3 | harsh@gmail.com      |   22 | MBA                       | Gujarat University | 9876543210   | 123 main street,city,country   | 2020-03-15   | professor       | active | harsh    | harsh    |
+|  9 | meet       | meet         | meet      |             1 | cefe@gmail.com       |   33 | fwefwef                   | wdggberfg          | 2345678987   | defxefx                        | 2024-05-25   | professor       | active | NULL     | NULL     |
++----+------------+--------------+-----------+---------------+----------------------+------+---------------------------+--------------------+--------------+--------------------------------+--------------+-----------------+--------+----------+----------+
+
+insert into student values(9,'meet','meet','meet','2024-05-25','Male','meey@gmail.com','2345678987','defxefx',1,2024,'SFI','2024-05-25','active','meet','meet');
+
 update student set username='hardik',password='hardik' where id=1;
 update student set username='meet', password='meet' where id=2;
 update student set username='hardik', password='hardik' where id=3;
@@ -115,7 +146,8 @@ update student set username='hardik', password='hardik' where id=3;
 //instructor
 
 INSERT INTO instructor (first_name, middle_name, last_name, department_id, email, age, qualification, college_name, phone_number, address, joining_date, instructor_type, status) 
-VALUES ('John', 'Doe', 'Smith', 1, 'john.doe@example.com', 35, 'Ph.D. in Computer Science', 'ABC College', '9258514856', '123 Main St, City, Country', '2023-01-15', 'professor', 'active');
+VALUES ('John', 'Doe', 'Smith', 1, 'john.doe@example.com', 35, 'Ph.D. in Computer Science', 'ABC College', '9258514856', '123 Main St, City, Country', '2023-01-15', 'professor', 'active','meet','meet');
+
 
 
 -- semester subjects
