@@ -18,6 +18,7 @@ create table instructor(
     address VARCHAR(255),
     joining_date DATE,
     
+    -- vrwgmwegewg
     instructor_type ENUM('professor','HOD','lecturer','lab assistant','librarian','accountant','clerk','peon','other'),
     status ENUM('active', 'deactive', 'resigned', 'retired', 'suspended', 'expelled', 'transfered'),
     PRIMARY KEY (id),
